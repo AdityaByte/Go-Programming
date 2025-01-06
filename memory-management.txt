@@ -1,0 +1,33 @@
+# In golang memory management is takes place automatically.
+# Memory allocation and deallocation happens automatically.Its not our job.
+
+# Memory management
+1. new()
+2. make() 
+Note - These are basically methods with the help of that 
+we can allocate some memory to the data-structure and can use them.
+
+1. new()
+-> Allocate memory but no initialize.
+-> You will get a memory address.
+-> zeroed storage - in the zeroed storage you cannot put any data
+
+2. make()
+-> Allocate memory and initialize
+-> You will get a memory address.
+-> non-zeroed storage - in the non-zeroed storage we put out some data.
+
+Garbage collection :
+-> GC happens automatically, anything which is out of scope or nil is collected by the 
+Garbage collector itself we don't need to destory or deallocate anything manually just 
+like c or c++.
+
+Story - In the initial days the golang faces some critism because of the GC afterwards the
+developer team write the entire GC one more time then the golang becomes boom.
+https://pkg.go.dev/runtime - its a package you can read out this.
+
+Doc Info - The GOGC variable sets the initial garbage collection target percentage.
+A collection is triggered when the ratio of freshly allocated data to live data remaining after the 
+previous collection reaches this percentage. The default is GOGC=100. Setting GOGC=off disables the 
+garbage collector entirely. 
+The runtime/debug package's SetGCPercent function allows changing this percentage at runtime.
