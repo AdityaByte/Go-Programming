@@ -22,19 +22,19 @@ func main() {
 	// If we want to delete an item from the map then
 	delete(languages, "JS") // 1st argument - Map, 2nd argument - key.
 
-	fmt.Println("New Map :",languages)
+	fmt.Println("New Map :", languages)
 
 	// Looping through a map (Since we haven't studied looping statement in go)
 
-	for key, value := range(languages) {
+	for key, value := range languages {
 		fmt.Printf("Key %v is short form of %v \n", key, value) // %v is a placeholder for value.
 	}
 	// Note - Here you can also use the comma ok syntax with the walrus operator if you want only key or only value.
 
 	var courseRating = map[string]int{
-		"Golang": 5,
-		"Python": 4,
-		"Java": 5,
+		"Golang":     5,
+		"Python":     4,
+		"Java":       5,
 		"Javascript": 3,
 	}
 
