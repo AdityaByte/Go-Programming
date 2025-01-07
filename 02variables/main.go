@@ -72,10 +72,11 @@ func main() {
 	fmt.Println(intValue)
 	fmt.Printf("Variable is of type : %T \n", intValue)
 
-	// There we have an another alias for int32 is rune
-	var int32Value rune = 12121212
-	fmt.Println(int32Value)
-	fmt.Printf("Variable is of type : %T \n", int32Value)
+	// A rune is basically used for storing a unicode character just a character and it is of 32 bits but it stores unicode character.
+	// Rune is basically an alias for int32 so it prints out 97 cause the unicode of a is equivalent to 97 in decimal.
+	var character rune = 'a'
+	fmt.Println(character)
+	fmt.Printf("As character : %c \n", character)
 
 	// Default values of some alias
 	var anotherVariable int // here we just declare the variable not initialize it.
