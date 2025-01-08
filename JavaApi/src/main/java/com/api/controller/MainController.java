@@ -5,17 +5,20 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.api.model.RequestModel;
 
 @RestController
 @RequestMapping("/api")
 public class MainController {
+
+    @GetMapping("/health-check")
+    public ResponseEntity<String> healthCheck(){
+        return ResponseEntity.ok("Health is Good");
+    }
     
     @GetMapping
     public ResponseEntity<String> handleGetRequest(){
@@ -28,14 +31,14 @@ public class MainController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<?> handlePostRequest(@RequestBody RequestModel requestModel){
-        return new ResponseEntity<>(requestModel, HttpStatus.OK);
+    public ResponseEntity<?> handlePostRequest(@RequestBody Object o1){
+        return new ResponseEntity<>(o1, HttpStatus.OK);
     }
 
     @PostMapping("/formdata")
     public ResponseEntity<?> handleFormData(
-        @ModelAttribute RequestModel model
+        @RequestParam Map<?,?> formData
     ) {
-        return new ResponseEntity<>(model, HttpStatus.OK);
+        return new ResponseEntity<>(formData, HttpStatus.OK);
     }
 }
