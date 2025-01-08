@@ -17,6 +17,9 @@ func main() {
 		panic(err)
 	}
 
+	// You have to expilicitly close the response body
+	defer response.Body.Close() // It's the caller responsibility to close that.
+
 	// ioutil.ReadAll(response.Body) // its deprecated now.
 	databytes, err := io.ReadAll(response.Body)
 
