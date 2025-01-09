@@ -1,0 +1,79 @@
+
+Golang Modules and Tools
+
+Basic Tools in Go
+1. go build
+   - Builds the application into a single binary, including all required packages.
+2. go run
+   - Executes a Go file directly, combining compilation and execution in one step.
+
+Initializing a Module
+- go mod init <module_name>
+  - Initializes a new module. The module name should follow the format:
+    hosting-platform/username/project-name
+    Example:
+    github.com/AdityaByte/mymodules
+
+Note:
+Refer to semver.org to understand versioning standards.
+
+Managing Dependencies
+1. go get
+   - Fetches dependencies from the web.
+     Example:
+     go get -u github.com/gorilla/mux
+
+     - -u: Updates the dependency to the latest minor or patch version.
+
+   Note:
+   - If a dependency is marked as indirect, it means it was added but isn't used directly in the code.
+
+2. go mod tidy
+   - Cleans up unused dependencies and organizes the go.mod file.
+   - Removes indirect dependencies if they aren't used.
+
+3. go mod verify
+   - Verifies the integrity of module downloads by checking hash values.
+     Output:
+     all modules verified
+
+4. go mod graph
+   - Visualizes the dependency graph.
+
+5. go mod why <module>
+   - Explains why a specific module is required.
+
+6. go mod edit
+   - Edits the go.mod file.
+     Examples:
+     - go mod edit -go <version>: Sets the Go version.
+     - go mod edit -module <module_name>: Renames the module.
+
+7. go mod vendor
+   - Creates a vendor folder containing all dependencies locally.
+     Usage:
+     go run -mod=vendor .\main.go
+
+   Note: Using vendor is generally not recommended in modern Go projects.
+
+Dependency Files
+- go.sum
+  - Tracks the hash values of fetched module versions. If a module changes unexpectedly, the hash check fails and throws an error.
+
+Java Comparison:
+Similar to Java's Maven dependencies stored in C:/Users/<username>/.m2/, Go stores dependencies in:
+C:/Users/<username>/go/pkg/mod/cache/download
+
+Listing and Querying Modules
+1. go list
+   - Lists the current module.
+2. go list all
+   - Lists all installed packages.
+3. go list -m all
+   - Lists all module dependencies in the project.
+4. go list -m -versions <module>
+   - Lists available versions of a specific module.
+
+Environment Variables
+- go env
+  - Displays environment variables, including GOMODCACHE, the location of the module cache.
