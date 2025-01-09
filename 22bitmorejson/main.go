@@ -16,7 +16,8 @@ type car struct {
 
 func main() {
 	fmt.Println("Working more with json")
-	EncodingJson()
+	// EncodingJson()
+	DecodeJson()
 }
 
 // Encoding data into json
@@ -39,4 +40,46 @@ func EncodingJson() {
 	}
 
 	fmt.Printf("%s\n", encodedJsonData) // we print json by placeholder %s
+}
+
+func DecodeJson() {
+	// The data we get is in the byte format further ado we make operations on it.
+	jsonDataFromWeb := []byte(`
+		{
+			"carname": "lamberghini aventador",
+			"company": "lamberghini",
+			"tags": [
+					"Fastest",
+					"luxory"
+			],
+			"ownerName": "Aditya Pawar"
+		}
+	`)
+
+	// Firstly we have to check the json is valid or not.
+	isValid := json.Valid(jsonDataFromWeb)
+
+	if isValid {
+		// Decoding the json data using unmarshal method
+		// Decoding with the help of struct reference.
+		var car1 car                           // We just declare it doesn't initialize it.
+		json.Unmarshal(jsonDataFromWeb, &car1) // Giving the reference of the car1.
+		fmt.Printf("%#v\n", car1)             // Placeholder %#v - format specifier.
+	} else {
+		fmt.Println("JSON WAS NOT VALID")
+	}
+
+	// If we want to decode json in just key value pair then...
+
+	var myCarDetail map[string]interface{} // since we dont know about the type of value which is in the value so we use the interface{}
+
+	json.Unmarshal(jsonDataFromWeb, &myCarDetail)
+
+	fmt.Printf("%#v\n", myCarDetail)
+
+	// Can also consume that using the for loop
+
+	for k,v := range myCarDetail {
+		fmt.Printf("Key : %v and Value : %v and Type : %T\n", k, v, v)
+	}
 }
