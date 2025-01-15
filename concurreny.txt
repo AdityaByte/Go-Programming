@@ -1,0 +1,44 @@
+## Concurrency
+-> Concurrency refers to the ability of a system to handle multiple tasks by switching between them. 
+It doesn’t mean the tasks are executed simultaneously but rather that they progress in overlapping time periods.
+
+Example: If you use your mobile, then watch TV, eat something, and then return to watching TV or your mobile, 
+you're doing these tasks in an interleaved manner. The system switches between tasks efficiently.
+
+## Parallelism
+-> Parallelism means executing multiple tasks at the same time, often using multiple processors or threads. 
+Each task is assigned its own resource and runs simultaneously.
+
+Example: If you are using your mobile while someone else is watching TV, and another person is eating, 
+all tasks are happening at the same time without interruptions.
+
+
+## Key Difference
+- Concurrency is about dealing with multiple tasks at once (not necessarily at the exact same time).
+- Parallelism is about executing multiple tasks simultaneously.
+
+## Threads
+-> Threads are managed by the operating system (OS).
+Each thread uses a fixed stack size (typically around 1 MB, depending on the system).
+While multiple threads can be created, the overhead of managing them (memory and context switching) is higher because they are directly tied to the OS.
+
+
+## Goroutines
+-> Goroutines are lightweight threads managed by the Go runtime instead of the OS.
+Each goroutine starts with a small stack (around 2 KB) that grows and shrinks dynamically as needed.
+This allows the Go runtime to handle thousands or even millions of goroutines efficiently, compared to threads.
+
+Key Differences
+Feature         Threads	                                Goroutines
+Managed By	Operating System	                        Go Runtime
+Stack Size	Fixed (e.g., 1 MB)	                Flexible (starts at ~2 KB)
+Overhead	High (due to OS management)     	Low (lightweight and efficient)
+Concurrency Model	Depends on OS-level scheduling	Go's scheduler (M:N model)
+
+## Additional Notes
+
+1. M:N Scheduling:
+----> Goroutines are mapped to threads using a "many-to-many" model. This means many goroutines can run on fewer OS threads, reducing context-switching overhead.
+
+2. Scalability:
+-----> Because goroutines are lightweight and dynamically scalable, Go programs can manage a massive number of concurrent tasks with ease.
