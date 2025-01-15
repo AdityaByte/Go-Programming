@@ -6,6 +6,9 @@ import (
 	"sync"
 )
 
+//Signal list 
+var signals = []string{"test"}
+
 var wg sync.WaitGroup // pointer
 
 // Mutex in Go - Mutex is used to ensure mutual exclusion, protecting shared resources from concurrent access.
@@ -26,7 +29,9 @@ func main() {
 		"https://google.com",
 		"https://fb.com",
 		"https://instagram.com",
+		"https://netflix.in",
 	}
+
 
 	for _, web := range websites {
 		go getStatusCode(web)
@@ -34,6 +39,8 @@ func main() {
 	}
 
 	wg.Wait()
+
+	fmt.Println(signals)
 }
 
 // greeter prints the given string 5 times with a small delay in between.
@@ -57,6 +64,7 @@ func getStatusCode(endpoint string) {
 	}
 
 	mut.Lock() // Locking the memory space by the goroutine.
-	fmt.Printf("Status code for site %s is %v\n", endpoint, web.StatusCode)
+	signals = append(signals, endpoint)
 	mut.Unlock() // Unlocking is required so that it can't go in the deadlock situation.
+	fmt.Printf("Status code for site %s is %v\n", endpoint, web.StatusCode)
 }
