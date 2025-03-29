@@ -56,6 +56,9 @@ type Response struct {
 
 // Here this is the function which calls the fetchThirdPartyStuff() function and it too creates a context.
 func fetchUserData(ctx context.Context, userId int) (int, error) {
+
+	value := ctx.Value("aditya") // we can also pass values through context.
+	fmt.Println("Value is:", value)
 	ctx, cancel := context.WithTimeout(ctx, time.Millisecond*200) // Here we created an another context which shutsdown if the request takes more than 200 miliseconds.
 	defer cancel()
 
