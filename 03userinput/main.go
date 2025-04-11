@@ -28,4 +28,10 @@ func main() {
 	fmt.Println("The user gives rating of", input)
 	fmt.Printf("The type of the user rating is %T", input)
 
+	// There is another way of reading input till the white space character ' '.
+	// via using the fmt.Scanln() function or fmt.Scan() function but they only reads till the first space.
+
+	var data string
+	fmt.Scan(&data)
+
 }	
