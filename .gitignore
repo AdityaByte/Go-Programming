@@ -27,3 +27,5 @@ go.work.sum
 vendor
 testdirgo
 25mongoapi
+34golang-jwt/.vscode
+.vscode
