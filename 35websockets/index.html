@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websocket client</title>
+</head>
+
+<body>
+    <form id="form">
+        <input type="text" placeholder="enter message">
+        <button type="submit">Send message</button>
+    </form>
+    <span id="response"></span>
+</body>
+<script>
+    let ws;
+
+    function connect() {
+        const backendURL = "ws://localhost:8080/ws"
+        ws = new WebSocket(backendURL)
+
+        // When the websocket creates a connection.
+        ws.onopen = function () {
+            console.log("Connected to the websocket connection.")
+        }
+
+        ws.onmessage = function (event) {
+            let messageDisplay = document.querySelector("#response")
+            messageDisplay.innerHTML = event.data
+        }
+
+        ws.onclose = function () {
+            console.log("Websocket connection closed, retrying..")
+            setTimeout(connect, 1000)
+        }
+
+        ws.onerror = function (error) {
+            console.error("Websocket error:", error)
+        }
+    }
+
+    document.querySelector("#form").addEventListener("submit", (event) => {
+        event.preventDefault()
+        input = document.querySelector("#form input[type=text]")
+        msg = input.value
+        ws.send(msg)
+        input.value = ""
+    })
+
+    connect()
+</script>
+
+</html>
